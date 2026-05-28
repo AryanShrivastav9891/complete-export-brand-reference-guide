@@ -1,0 +1,895 @@
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --color-bg: #f8f7f4;
+    --color-surface: #ffffff;
+    --color-surface-2: #f2f0ec;
+    --color-border: #e4e1d8;
+    --color-border-light: #ede9e1;
+    --color-text-primary: #1a1714;
+    --color-text-secondary: #5c5650;
+    --color-text-tertiary: #9c9489;
+    --color-accent: #8B6914;
+    --color-accent-light: #f5edda;
+    --color-green: #3B6D11;
+    --color-green-bg: #edf5e4;
+    --color-red: #A32D2D;
+    --color-red-bg: #fceaea;
+    --color-amber: #854F0B;
+    --color-amber-bg: #fef0d8;
+    --color-blue: #185FA5;
+    --color-blue-bg: #e4eef9;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 18px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,.10), 0 2px 8px rgba(0,0,0,.05);
+    --transition: 0.18s ease;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text-primary);
+    min-height: 100vh;
+    line-height: 1.5;
+  }
+
+  /* ── Page wrapper ─────────────────────────────────── */
+  .page-shell {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 16px 60px;
+  }
+
+  /* ── Hero header ──────────────────────────────────── */
+  .brand-header {
+    padding: 36px 0 28px;
+    border-bottom: 1px solid var(--color-border-light);
+    margin-bottom: 28px;
+  }
+  .brand-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 6px;
+  }
+  .brand-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    line-height: 1.1;
+    letter-spacing: -.5px;
+  }
+  .brand-name span {
+    color: var(--color-accent);
+  }
+  .brand-tagline {
+    font-size: 13.5px;
+    color: var(--color-text-secondary);
+    margin-top: 6px;
+  }
+
+  /* ── Section title ────────────────────────────────── */
+  .section-title {
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    margin: 22px 0 10px;
+  }
+
+  /* ── Metric grid ──────────────────────────────────── */
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  @media (max-width: 540px) {
+    .metric-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .metric {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 14px 16px;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow var(--transition), transform var(--transition);
+  }
+  .metric::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-accent), #c8a24a);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+  .metric:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
+  .metric-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-text-tertiary);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  .metric-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    line-height: 1.2;
+  }
+  .metric-sub {
+    font-size: 11.5px;
+    color: var(--color-text-secondary);
+    margin-top: 3px;
+  }
+
+  /* ── Tab navigation ───────────────────────────────── */
+  .tabs-wrap {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--color-bg);
+    padding: 8px 0 0;
+    margin-bottom: 20px;
+  }
+  .tabs {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    border-bottom: 1.5px solid var(--color-border);
+    padding-bottom: 0;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: var(--color-text-secondary);
+    border-bottom: 2.5px solid transparent;
+    margin-bottom: -1.5px;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    transition: color var(--transition), background var(--transition), border-color var(--transition);
+    white-space: nowrap;
+    font-family: 'Inter', sans-serif;
+  }
+  .tab.active {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+    background: var(--color-accent-light);
+  }
+  .tab:hover:not(.active) {
+    color: var(--color-text-primary);
+    background: var(--color-surface-2);
+  }
+
+  /* ── Panel ────────────────────────────────────────── */
+  .panel { display: none; animation: fadeIn .2s ease; }
+  .panel.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── Card ─────────────────────────────────────────── */
+  .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* ── Badge ────────────────────────────────────────── */
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 99px;
+    letter-spacing: .02em;
+    white-space: nowrap;
+  }
+  .badge-amber { background: var(--color-amber-bg); color: var(--color-amber); }
+  .badge-green { background: var(--color-green-bg); color: var(--color-green); }
+  .badge-red   { background: var(--color-red-bg);   color: var(--color-red); }
+  .badge-blue  { background: var(--color-blue-bg);  color: var(--color-blue); }
+
+  /* ── Risk rows ────────────────────────────────────── */
+  .risk-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--color-border-light);
+    transition: background var(--transition);
+  }
+  .risk-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .risk-row:first-child { padding-top: 0; }
+  .risk-dot {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(0,0,0,.06);
+  }
+  .risk-text { font-size: 13px; color: var(--color-text-primary); flex: 1; line-height: 1.5; }
+
+  /* ── Product grid ─────────────────────────────────── */
+  .product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  @media (max-width: 480px) { .product-grid { grid-template-columns: 1fr; } }
+  .product-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 14px 16px;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow var(--transition), transform var(--transition);
+  }
+  .product-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+  .product-name {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+  .product-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+  .product-key { color: var(--color-text-secondary); }
+  .product-val { font-weight: 600; color: var(--color-text-primary); }
+  .profit-bar-wrap {
+    margin-top: 10px;
+    background: var(--color-surface-2);
+    border-radius: 99px;
+    height: 6px;
+    overflow: hidden;
+  }
+  .profit-bar {
+    height: 6px;
+    border-radius: 99px;
+    background: linear-gradient(90deg, #4a8a16, #6db82a);
+    transition: width .6s ease;
+  }
+
+  /* ── Pricing scenarios ────────────────────────────── */
+  .scenario-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  @media (max-width: 480px) { .scenario-grid { grid-template-columns: 1fr; } }
+  .scenario {
+    background: var(--color-surface);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 16px 14px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow var(--transition), transform var(--transition);
+  }
+  .scenario:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+  .scenario-label {
+    font-size: 10.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--color-text-tertiary);
+    margin-bottom: 6px;
+  }
+  .scenario-price { font-size: 22px; font-weight: 700; color: var(--color-text-primary); }
+  .scenario-margin { font-size: 12.5px; margin-top: 5px; font-weight: 500; }
+
+  /* ── Fee rows ─────────────────────────────────────── */
+  .fee-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--color-border-light);
+    gap: 12px;
+  }
+  .fee-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .fee-row:first-child { padding-top: 0; }
+  .fee-name { color: var(--color-text-secondary); }
+  .fee-amount { font-weight: 600; color: var(--color-text-primary); text-align: right; }
+
+  /* ── Week timeline ────────────────────────────────── */
+  .week-list { display: flex; flex-direction: column; gap: 10px; }
+  .week-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 16px 18px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow var(--transition), border-color var(--transition);
+  }
+  .week-item:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-accent);
+  }
+  .week-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-accent);
+    background: var(--color-accent-light);
+    border-radius: var(--radius-sm);
+    padding: 4px 8px;
+    min-width: 58px;
+    text-align: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+    letter-spacing: .02em;
+  }
+  .week-title {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 5px;
+  }
+  .week-task { font-size: 12.5px; color: var(--color-text-secondary); line-height: 1.6; }
+  .week-cost { font-size: 11.5px; font-weight: 600; margin-top: 7px; display: inline-block; padding: 2px 8px; border-radius: 99px; background: var(--color-surface-2); }
+
+  /* ── Platform cards ───────────────────────────────── */
+  .platform-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 18px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    margin-bottom: 12px;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow var(--transition), transform var(--transition);
+  }
+  .platform-card:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
+  .platform-icon {
+    width: 42px; height: 42px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-sm);
+  }
+  .platform-name { font-size: 14px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 3px; }
+  .platform-when { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 5px; }
+  .platform-note { font-size: 12.5px; color: var(--color-text-secondary); line-height: 1.6; }
+
+  /* ── Checklist ────────────────────────────────────── */
+  .checklist-progress {
+    background: var(--color-surface-2);
+    border-radius: 99px;
+    height: 6px;
+    overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .checklist-progress-bar {
+    height: 6px;
+    border-radius: 99px;
+    background: linear-gradient(90deg, var(--color-green), #6db82a);
+    width: 0%;
+    transition: width .4s ease;
+  }
+  .checklist-count {
+    font-size: 11.5px;
+    color: var(--color-text-secondary);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .checklist { display: flex; flex-direction: column; gap: 6px; }
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+    transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+    box-shadow: var(--shadow-sm);
+  }
+  .check-item:hover { border-color: var(--color-accent); box-shadow: var(--shadow-md); }
+  .check-item.is-done { background: var(--color-green-bg); border-color: #b8d99a; }
+  .check-box {
+    width: 18px; height: 18px;
+    border-radius: 5px;
+    border: 2px solid var(--color-border);
+    flex-shrink: 0;
+    margin-top: 1px;
+    cursor: pointer;
+    background: var(--color-surface);
+    transition: all var(--transition);
+    position: relative;
+  }
+  .check-box.done {
+    background: var(--color-green);
+    border-color: var(--color-green);
+  }
+  .check-box.done::after {
+    content: '✓';
+    position: absolute;
+    top: -1px; left: 2px;
+    font-size: 12px;
+    color: #fff;
+    font-weight: 700;
+  }
+  .check-text { font-size: 13px; color: var(--color-text-primary); line-height: 1.5; flex: 1; transition: color var(--transition); }
+  .check-text.done { text-decoration: line-through; color: var(--color-text-tertiary); }
+
+  /* ── Action buttons ───────────────────────────────── */
+  .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+  @media (max-width: 480px) { .btn-grid { grid-template-columns: 1fr; } }
+  .ask-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 11px 16px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--color-text-primary);
+    font-family: 'Inter', sans-serif;
+    transition: all var(--transition);
+    box-shadow: var(--shadow-sm);
+    text-align: left;
+  }
+  .ask-btn:hover {
+    background: var(--color-accent-light);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+
+  /* ── Info callout ─────────────────────────────────── */
+  .callout {
+    background: var(--color-accent-light);
+    border: 1px solid #d4b47a;
+    border-left: 4px solid var(--color-accent);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--color-text-primary);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  /* ── Utility ──────────────────────────────────────── */
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+</style>
+
+<div class="page-shell">
+  <div class="brand-header">
+    <div class="brand-eyebrow">Business Dashboard</div>
+    <div class="brand-name">Kaasya<span>.</span></div>
+    <div class="brand-tagline">Your complete export brand reference guide — Indian brass artisan goods for the global market</div>
+  </div>
+
+  <h2 class="sr-only">Kaasya business dashboard — your complete export brand reference guide</h2>
+
+  <div class="metric-grid">
+    <div class="metric">
+      <div class="metric-label">Total budget</div>
+      <div class="metric-value">₹30k</div>
+      <div class="metric-sub">Starting capital</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Brand name</div>
+      <div class="metric-value">Kaasya</div>
+      <div class="metric-sub">Recommended</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Target market</div>
+      <div class="metric-value">USA · UK · AU</div>
+      <div class="metric-sub">Women 24–40</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">6-month success</div>
+      <div class="metric-value">35%</div>
+      <div class="metric-sub">Break-even odds</div>
+    </div>
+  </div>
+
+  <div class="tabs-wrap">
+    <div class="tabs" id="tabs">
+      <button class="tab active" data-tab="risks">⚠️ Risks</button>
+      <button class="tab" data-tab="products">📦 Products</button>
+      <button class="tab" data-tab="pricing">💰 Pricing</button>
+      <button class="tab" data-tab="budget">📊 Budget</button>
+      <button class="tab" data-tab="90day">🗓 90-Day Plan</button>
+      <button class="tab" data-tab="platforms">🌐 Platforms</button>
+      <button class="tab" data-tab="checklist">✅ Checklist</button>
+    </div>
+  </div>
+
+  <div class="panel active" id="panel-risks">
+    <div class="section-title">7 real risks — ranked by severity</div>
+    <div class="card">
+      <div class="risk-row"><div class="risk-dot" style="background:#A32D2D"></div><div class="risk-text">Shipping cost destroys margins — brass is heavy, India Post EMS to USA = ₹1,800–₹2,500 per order</div><span class="badge badge-red">Critical</span></div>
+      <div class="risk-row"><div class="risk-dot" style="background:#A32D2D"></div><div class="risk-text">Etsy dead zone — zero organic traffic for first 60–90 days. Most sellers quit here</div><span class="badge badge-red">Critical</span></div>
+      <div class="risk-row"><div class="risk-dot" style="background:#854F0B"></div><div class="risk-text">10,000+ competing listings. You must differentiate via story + photography, not price</div><span class="badge badge-amber">High</span></div>
+      <div class="risk-row"><div class="risk-dot" style="background:#854F0B"></div><div class="risk-text">India Post damage rate 10–15%. One bad review tanks your new shop</div><span class="badge badge-amber">High</span></div>
+      <div class="risk-row"><div class="risk-dot" style="background:#854F0B"></div><div class="risk-text">PayPal holds funds 21 days for new sellers. Use Payoneer or Wise instead</div><span class="badge badge-amber">High</span></div>
+      <div class="risk-row"><div class="risk-dot" style="background:#185FA5"></div><div class="risk-text">No budget buffer — one lost shipment ends the business. Keep ₹6k untouched</div><span class="badge badge-blue">Medium</span></div>
+      <div class="risk-row"><div class="risk-dot" style="background:#185FA5"></div><div class="risk-text">GST / FEMA compliance gaps — not urgent in Month 1 but set up correctly from the start</div><span class="badge badge-blue">Medium</span></div>
+    </div>
+    <div class="section-title">Your actual advantages</div>
+    <div class="card">
+      <div class="risk-row"><div class="risk-dot" style="background:#3B6D11"></div><div class="risk-text">Stable job = no pressure to profit in Month 1. Most sellers don't have this</div></div>
+      <div class="risk-row"><div class="risk-dot" style="background:#3B6D11"></div><div class="risk-text">Delhi / Moradabad access — you sit on the world's largest brass export hub</div></div>
+      <div class="risk-row"><div class="risk-dot" style="background:#3B6D11"></div><div class="risk-text">2026 wellness + spiritual decor trend is genuinely booming in USA and UK</div></div>
+      <div class="risk-row"><div class="risk-dot" style="background:#3B6D11"></div><div class="risk-text">Building a real brand = top 5% of Indian Etsy sellers who actually differentiate</div></div>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-products">
+    <div class="section-title">Hero products — start with these 5</div>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-name">Brass incense holder</div>
+        <div class="product-row"><span class="product-key">Source cost</span><span class="product-val">₹120–250</span></div>
+        <div class="product-row"><span class="product-key">Sell at</span><span class="product-val">$28–42 USD</span></div>
+        <div class="product-row"><span class="product-key">Weight</span><span class="product-val">&lt;250g ✓</span></div>
+        <div class="product-row"><span class="product-key">Margin (at $35)</span><span class="product-val">~28%</span></div>
+        <div class="profit-bar-wrap"><div class="profit-bar" style="width:28%"></div></div>
+      </div>
+      <div class="product-card">
+        <div class="product-name">Brass diya — set of 3</div>
+        <div class="product-row"><span class="product-key">Source cost</span><span class="product-val">₹80–180 each</span></div>
+        <div class="product-row"><span class="product-key">Sell at</span><span class="product-val">$32–48 USD</span></div>
+        <div class="product-row"><span class="product-key">Weight</span><span class="product-val">~400g set</span></div>
+        <div class="product-row"><span class="product-key">Margin (at $40)</span><span class="product-val">~30%</span></div>
+        <div class="profit-bar-wrap"><div class="profit-bar" style="width:30%"></div></div>
+      </div>
+      <div class="product-card">
+        <div class="product-name">Brass altar tray</div>
+        <div class="product-row"><span class="product-key">Source cost</span><span class="product-val">₹300–600</span></div>
+        <div class="product-row"><span class="product-key">Sell at</span><span class="product-val">$45–75 USD</span></div>
+        <div class="product-row"><span class="product-key">Weight</span><span class="product-val">~500g</span></div>
+        <div class="product-row"><span class="product-key">Margin (at $60)</span><span class="product-val">~38%</span></div>
+        <div class="profit-bar-wrap"><div class="profit-bar" style="width:38%"></div></div>
+      </div>
+      <div class="product-card">
+        <div class="product-name">Brass candle holder pair</div>
+        <div class="product-row"><span class="product-key">Source cost</span><span class="product-val">₹200–350</span></div>
+        <div class="product-row"><span class="product-key">Sell at</span><span class="product-val">$28–42 USD</span></div>
+        <div class="product-row"><span class="product-key">Weight</span><span class="product-val">~350g</span></div>
+        <div class="product-row"><span class="product-key">Margin (at $35)</span><span class="product-val">~25%</span></div>
+        <div class="profit-bar-wrap"><div class="profit-bar" style="width:25%"></div></div>
+      </div>
+      <div class="product-card">
+        <div class="product-name">Small Ganesha figurine</div>
+        <div class="product-row"><span class="product-key">Source cost</span><span class="product-val">₹150–300</span></div>
+        <div class="product-row"><span class="product-key">Sell at</span><span class="product-val">$28–38 USD</span></div>
+        <div class="product-row"><span class="product-key">Weight</span><span class="product-val">&lt;200g ✓</span></div>
+        <div class="product-row"><span class="product-key">Margin (at $32)</span><span class="product-val">~32%</span></div>
+        <div class="profit-bar-wrap"><div class="profit-bar" style="width:32%"></div></div>
+      </div>
+      <div class="product-card" style="border-style:dashed;border-color:#c8a24a;background:#fdf8ef">
+        <div class="product-name" style="color:#8B6914">Add-on: artisan story card</div>
+        <div class="product-row"><span class="product-key">Print cost</span><span class="product-val">₹8–15</span></div>
+        <div class="product-row"><span class="product-key">Perceived value</span><span class="product-val">Very high</span></div>
+        <div class="product-row"><span class="product-key">Effect</span><span class="product-val">Social shares</span></div>
+        <div style="font-size:11.5px;color:#8B6914;margin-top:8px;font-weight:500">Include in every order</div>
+      </div>
+    </div>
+    <div class="section-title">What to avoid</div>
+    <div class="card">
+      <div class="risk-row"><div class="risk-dot" style="background:#A32D2D"></div><div class="risk-text">Items over 500g — shipping kills the margin</div></div>
+      <div class="risk-row"><div class="risk-dot" style="background:#A32D2D"></div><div class="risk-text">Glass-brass combos — breakage = refunds = bad reviews</div></div>
+      <div class="risk-row"><div class="risk-dot" style="background:#A32D2D"></div><div class="risk-text">Spray-painted zinc sold as brass — Western buyers will notice</div></div>
+      <div class="risk-row"><div class="risk-dot" style="background:#854F0B"></div><div class="risk-text">Large sets of 8–10 pieces — too heavy, complex to pack</div></div>
+      <div class="risk-row"><div class="risk-dot" style="background:#854F0B"></div><div class="risk-text">Generic Om / cross designs with no story — fully commoditized</div></div>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-pricing">
+    <div class="section-title">Incense holder — profit at 3 price points</div>
+    <div class="scenario-grid">
+      <div class="scenario" style="border-color:#f0a08a;background:#fff8f6">
+        <div class="scenario-label">Too cheap</div>
+        <div class="scenario-price">$32 USD</div>
+        <div style="font-size:12px;color:#8B6914;margin-top:2px">≈ ₹2,650</div>
+        <div class="scenario-margin" style="color:#A32D2D">Profit: ~₹302</div>
+        <div style="font-size:11px;color:#999;margin-top:4px">11% margin</div>
+      </div>
+      <div class="scenario" style="border-color:#a8cc7e;background:#f6faf0">
+        <div class="scenario-label">Workable</div>
+        <div class="scenario-price">$42 USD</div>
+        <div style="font-size:12px;color:#5c5650;margin-top:2px">≈ ₹3,480</div>
+        <div class="scenario-margin" style="color:#3B6D11">Profit: ~₹1,132</div>
+        <div style="font-size:11px;color:#999;margin-top:4px">32% margin</div>
+      </div>
+      <div class="scenario" style="border-color:#3B6D11;border-width:2px;background:#edf5e4">
+        <div class="scenario-label" style="color:#3B6D11">Target ✓</div>
+        <div class="scenario-price">$52 USD</div>
+        <div style="font-size:12px;color:#5c5650;margin-top:2px">≈ ₹4,310</div>
+        <div class="scenario-margin" style="color:#3B6D11">Profit: ~₹1,962</div>
+        <div style="font-size:11px;color:#3B6D11;font-weight:600;margin-top:4px">45% margin</div>
+      </div>
+    </div>
+    <div class="section-title">Per-order cost breakdown (USA, 300g package)</div>
+    <div class="card">
+      <div class="fee-row"><span class="fee-name">Product sourcing</span><span class="fee-amount">₹200</span></div>
+      <div class="fee-row"><span class="fee-name">Packaging (box, tissue, cards, ribbon)</span><span class="fee-amount">₹75</span></div>
+      <div class="fee-row"><span class="fee-name">Shipping via Aramex (recommended)</span><span class="fee-amount">₹2,200</span></div>
+      <div class="fee-row"><span class="fee-name">Etsy fees (6.5% tx + 3% payment)</span><span class="fee-amount">₹390</span></div>
+      <div class="fee-row"><span class="fee-name">Payoneer transfer fee (~2%)</span><span class="fee-amount">₹86</span></div>
+      <div class="fee-row" style="font-weight:600"><span class="fee-name">Total cost at $52 sale</span><span class="fee-amount">₹2,951</span></div>
+      <div class="fee-row" style="font-weight:700;color:#3B6D11;background:#edf5e4;margin:4px -4px -4px;padding:10px 4px;border-radius:0 0 10px 10px"><span class="fee-name" style="color:#3B6D11">Net profit</span><span class="fee-amount" style="color:#3B6D11">₹1,359</span></div>
+    </div>
+    <div class="section-title">Shipping options compared</div>
+    <div class="card">
+      <div class="fee-row"><span class="fee-name">India Post EMS</span><span class="fee-amount">₹1,600–2,200 · 15–30 days · 10–15% damage</span></div>
+      <div class="fee-row"><span class="fee-name">Aramex ★ recommended</span><span class="fee-amount">₹2,200–3,200 · 10–15 days · reliable</span></div>
+      <div class="fee-row"><span class="fee-name">DHL / FedEx Express</span><span class="fee-amount">₹3,200–5,000 · 5–8 days · offer as upgrade</span></div>
+    </div>
+    <div class="section-title">6-month realistic revenue forecast</div>
+    <div class="card" id="forecastCard">
+      <div style="position:relative;width:100%;height:220px"><canvas id="forecastChart" role="img" aria-label="Bar chart showing monthly revenue forecast from month 1 to month 6">Month 1: $40, Month 2: $140, Month 3: $350, Month 4: $650, Month 5: $1000, Month 6: $1450.</canvas></div>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-budget">
+    <div class="section-title">₹30,000 allocation</div>
+    <div class="card" id="budgetCard">
+      <div style="position:relative;width:100%;height:260px"><canvas id="budgetChart" role="img" aria-label="Horizontal bar chart showing budget allocation across categories">Inventory 10000, Packaging 2500, Moradabad trip 2500, Branding print 1500, Photography props 1000, Shipping supplies 1000, Etsy setup 250, Buffer 6250, Reserve 5000.</canvas></div>
+    </div>
+    <div class="section-title">Key rule — the reserve</div>
+    <div class="callout">Keep <strong>₹6,250 as an emergency buffer</strong> untouched in your account. One lost international shipment costs ₹2,500–₹4,000. One Etsy dispute could freeze a sale. Without a buffer, a single bad week ends the business. This is not optional.</div>
+    <div class="section-title">Payment setup — recommended</div>
+    <div class="card">
+      <div class="fee-row"><span class="fee-name">Primary: Payoneer</span><span class="fee-amount badge badge-green">Use this</span></div>
+      <div class="fee-row"><span class="fee-name">Alternative: Wise (TransferWise)</span><span class="fee-amount badge badge-green">Lowest fees</span></div>
+      <div class="fee-row"><span class="fee-name">Avoid: PayPal</span><span class="fee-amount badge badge-red">21-day holds</span></div>
+      <div style="font-size:12.5px;color:#5c5650;margin-top:.875rem;line-height:1.7">Flow: Etsy Payments → Payoneer account → Indian bank (SBI/HDFC). Setup takes 3–5 business days. Do this in Week 1.</div>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-90day">
+    <div class="section-title">Week-by-week execution plan</div>
+    <div class="week-list">
+      <div class="week-item">
+        <div class="week-num">Week 1</div>
+        <div>
+          <div class="week-title">Foundation</div>
+          <div class="week-task">Research top 10 Etsy listings in your niche. Register "Kaasya" on Etsy, Instagram, and as .com domain. Design logo on Canva (Cormorant Garamond font). Set up Payoneer account.</div>
+          <div class="week-cost" style="color:#3B6D11">Cost: ~₹800 (domain)</div>
+        </div>
+      </div>
+      <div class="week-item">
+        <div class="week-num">Week 2</div>
+        <div>
+          <div class="week-title">First sourcing trip — Delhi</div>
+          <div class="week-task">Go to Kinari Bazaar and Chawri Bazaar. Buy 2–3 samples of 8–10 products (₹1,500–2,000). Also buy packaging from Sadar Bazaar. Evaluate quality ruthlessly at home.</div>
+          <div class="week-cost" style="color:#854F0B">Cost: ₹3,000–4,000</div>
+        </div>
+      </div>
+      <div class="week-item">
+        <div class="week-num">Week 3</div>
+        <div>
+          <div class="week-title">Photography and branding</div>
+          <div class="week-task">Buy props (marble vinyl, dried flowers, linen fabric). Print stickers and thank you cards at local print shop. Spend one full day shooting 40–60 photos per product. Edit in Lightroom Mobile.</div>
+          <div class="week-cost" style="color:#854F0B">Cost: ₹1,500–2,000</div>
+        </div>
+      </div>
+      <div class="week-item">
+        <div class="week-num">Week 4</div>
+        <div>
+          <div class="week-title">Etsy launch</div>
+          <div class="week-task">Write all listing descriptions using the SEO formula. Set 13 Etsy tags per listing. List first 4–5 products. Do NOT tell friends yet — you want organic traffic data, not pity buys.</div>
+          <div class="week-cost" style="color:#3B6D11">Cost: ₹250 (listing fees)</div>
+        </div>
+      </div>
+      <div class="week-item">
+        <div class="week-num">Week 5–6</div>
+        <div>
+          <div class="week-title">Moradabad sourcing trip</div>
+          <div class="week-task">Use your Etsy view data to know which products to buy more of. Train to Moradabad. Buy 10–15 pieces of top 3–4 products. This is your main inventory buy.</div>
+          <div class="week-cost" style="color:#854F0B">Cost: ₹7,000–8,000 (trip + inventory)</div>
+        </div>
+      </div>
+      <div class="week-item">
+        <div class="week-num">Week 7–8</div>
+        <div>
+          <div class="week-title">Instagram and Pinterest launch</div>
+          <div class="week-task">Post 3x/week on Instagram. Show sourcing trip footage, packing videos, styled flat lays. Create Pinterest boards: "Meditation Room Decor", "Brass Decor Inspiration". Pin all product photos.</div>
+          <div class="week-cost" style="color:#3B6D11">Cost: ₹0</div>
+        </div>
+      </div>
+      <div class="week-item">
+        <div class="week-num">Week 9–10</div>
+        <div>
+          <div class="week-title">First sales push</div>
+          <div class="week-task">Start Etsy Ads at $5 USD/day max. DM 15–20 micro-influencers (5k–50k followers, yoga/wellness/home niche in USA/UK). Offer free product — no obligation to post. Goal: first 3–5 sales and reviews.</div>
+          <div class="week-cost" style="color:#854F0B">Cost: ₹3,500 (ads + 2–3 influencer shipments)</div>
+        </div>
+      </div>
+      <div class="week-item">
+        <div class="week-num">Week 11–12</div>
+        <div>
+          <div class="week-title">Review and adjust</div>
+          <div class="week-task">What sold? Double down on it. What didn't move? Fix the photos/description or remove it. Target by Week 12: 3–8 sales, 2–4 reviews. That is a successful launch — not a failure.</div>
+          <div class="week-cost" style="color:#185FA5">Cost: depends on reorder</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-platforms">
+    <div class="section-title">Platform order — do not skip ahead</div>
+    <div class="platform-card">
+      <div class="platform-icon" style="background:#EAF3DE;color:#3B6D11"><i class="ti ti-shopping-bag" aria-hidden="true"></i></div>
+      <div>
+        <div class="platform-name">Etsy <span class="badge badge-green" style="margin-left:6px">Start here — Month 1</span></div>
+        <div class="platform-when">Months 1–4 as your only platform</div>
+        <div class="platform-note">Built-in audience of buyers actively searching handmade and artisan items. Your target buyer shops here. Fees: $0.20 listing + 6.5% transaction + 3% payment processing.</div>
+      </div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-icon" style="background:#E6F1FB;color:#185FA5"><i class="ti ti-brand-instagram" aria-hidden="true"></i></div>
+      <div>
+        <div class="platform-name">Instagram + Pinterest <span class="badge badge-blue" style="margin-left:6px">Month 2</span></div>
+        <div class="platform-when">For traffic to Etsy, not direct selling yet</div>
+        <div class="platform-note">Reels showing sourcing trips, packing, artisan story. This authenticity is your biggest competitive edge — no Western seller can replicate it. Pinterest drives passive Etsy traffic for free.</div>
+      </div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-icon" style="background:#FAEEDA;color:#854F0B"><i class="ti ti-layout" aria-hidden="true"></i></div>
+      <div>
+        <div class="platform-name">Shopify <span class="badge badge-amber" style="margin-left:6px">Month 6+</span></div>
+        <div class="platform-when">Only after 20+ Etsy reviews and proven products</div>
+        <div class="platform-note">Costs $29 USD/month and you must drive all your own traffic. Starting before you have traction is wasted money. Use Etsy to validate first.</div>
+      </div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-icon" style="background:#FCEBEB;color:#A32D2D"><i class="ti ti-ban" aria-hidden="true"></i></div>
+      <div>
+        <div class="platform-name">eBay — avoid entirely</div>
+        <div class="platform-when">Not suitable for premium brand positioning</div>
+        <div class="platform-note">eBay buyers hunt for discounts. Your premium pricing will be ignored. Your brand story is wasted. Do not list here.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-checklist">
+    <div class="section-title">Week 1 launch checklist — tap to mark done</div>
+    <div class="checklist-count" id="checkCount">0 of 10 completed</div>
+    <div class="checklist-progress"><div class="checklist-progress-bar" id="checkBar"></div></div>
+    <div class="checklist" id="checklist">
+      <div class="check-item" data-id="0" onclick="toggleCheck(0)"><div class="check-box"></div><div class="check-text">Research top 10 Etsy listings for "brass incense holder" and "meditation altar decor"</div></div>
+      <div class="check-item" data-id="1" onclick="toggleCheck(1)"><div class="check-box"></div><div class="check-text">Verify "Kaasya" is available on Etsy, Instagram, and as .com domain</div></div>
+      <div class="check-item" data-id="2" onclick="toggleCheck(2)"><div class="check-box"></div><div class="check-text">Register domain on GoDaddy India (≈₹800/year)</div></div>
+      <div class="check-item" data-id="3" onclick="toggleCheck(3)"><div class="check-box"></div><div class="check-text">Create Instagram account @kaasya or @kaasya.home</div></div>
+      <div class="check-item" data-id="4" onclick="toggleCheck(4)"><div class="check-box"></div><div class="check-text">Design logo on Canva using Cormorant Garamond font</div></div>
+      <div class="check-item" data-id="5" onclick="toggleCheck(5)"><div class="check-box"></div><div class="check-text">Register Payoneer account and link to your Indian bank</div></div>
+      <div class="check-item" data-id="6" onclick="toggleCheck(6)"><div class="check-box"></div><div class="check-text">Open Etsy seller account, complete all profile sections and policies</div></div>
+      <div class="check-item" data-id="7" onclick="toggleCheck(7)"><div class="check-box"></div><div class="check-text">Write your brand story (use the Kaasya story template from your plan)</div></div>
+      <div class="check-item" data-id="8" onclick="toggleCheck(8)"><div class="check-box"></div><div class="check-text">Plan first sourcing trip to Kinari Bazaar / Chawri Bazaar (Old Delhi)</div></div>
+      <div class="check-item" data-id="9" onclick="toggleCheck(9)"><div class="check-box"></div><div class="check-text">Set processing time to 5–7 business days in Etsy settings</div></div>
+    </div>
+    <div class="section-title" style="margin-top:1.25rem">Go deeper on any topic</div>
+    <div class="btn-grid">
+      <button class="ask-btn" onclick="sendPrompt('Give me a complete sourcing guide for Kinari Bazaar and Moradabad — exact streets, negotiation phrases in Hindi, and quality checks for brass')">Sourcing deep dive ↗</button>
+      <button class="ask-btn" onclick="sendPrompt('Give me a complete phone photography guide for my brass products — exact setup, props, Lightroom Mobile settings, and the 6 shots I need per listing')">Photography guide ↗</button>
+      <button class="ask-btn" onclick="sendPrompt('Help me write my first 3 Etsy listings for Kaasya — complete titles, descriptions, and all 13 tags for the incense holder, diya set, and altar tray')">Etsy listing workshop ↗</button>
+      <button class="ask-btn" onclick="sendPrompt('Walk me through setting up Payoneer for Etsy, Aramex for shipping, and what documents I need for international exports from India')">Shipping and payments ↗</button>
+      <button class="ask-btn" onclick="sendPrompt('Give me a 30-day Instagram content plan for Kaasya with exact caption templates and how to approach micro-influencers in the wellness niche')">Instagram strategy ↗</button>
+      <button class="ask-btn" onclick="sendPrompt('What are the legal and tax requirements I need to set up as an Indian exporter selling on Etsy — GST, FEMA, FIRC, and bookkeeping basics')">Legal and tax setup ↗</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+function switchTab(id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelector('[data-tab="'+id+'"]').classList.add('active');
+  document.getElementById('panel-'+id).classList.add('active');
+  if(id==='pricing' && !window.forecastBuilt){buildForecast();window.forecastBuilt=true}
+  if(id==='budget' && !window.budgetBuilt){buildBudget();window.budgetBuilt=true}
+}
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>switchTab(t.dataset.tab)));
+
+function toggleCheck(id){
+  const item=document.querySelector('[data-id="'+id+'"]');
+  const box=item.querySelector('.check-box');
+  const txt=item.querySelector('.check-text');
+  box.classList.toggle('done');
+  txt.classList.toggle('done');
+  item.classList.toggle('is-done');
+  const total=document.querySelectorAll('.check-item').length;
+  const done=document.querySelectorAll('.check-box.done').length;
+  document.getElementById('checkCount').textContent=done+' of '+total+' completed';
+  document.getElementById('checkBar').style.width=Math.round(done/total*100)+'%';
+}
+
+function buildForecast(){
+  new Chart(document.getElementById('forecastChart'),{
+    type:'bar',
+    data:{
+      labels:['Month 1','Month 2','Month 3','Month 4','Month 5','Month 6'],
+      datasets:[
+        {label:'Low estimate ($)',data:[40,80,200,400,600,900],backgroundColor:'#d4c5a5',borderRadius:6},
+        {label:'High estimate ($)',data:[80,200,500,900,1400,2000],backgroundColor:'#4a8a16',borderRadius:6}
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{
+        x:{grid:{display:false},ticks:{font:{size:11,family:'Inter'},color:'#9c9489'}},
+        y:{grid:{color:'rgba(0,0,0,.06)'},ticks:{callback:v=>'$'+v,font:{size:11,family:'Inter'},color:'#9c9489'},border:{dash:[4,4]}}
+      }
+    }
+  });
+  const el=document.getElementById('forecastCard');
+  const leg=document.createElement('div');
+  leg.style='display:flex;gap:20px;font-size:12px;color:#5c5650;margin-bottom:10px;font-family:Inter,sans-serif';
+  leg.innerHTML='<span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#4a8a16;display:inline-block"></span>High estimate</span><span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#d4c5a5;display:inline-block"></span>Low estimate</span>';
+  el.insertBefore(leg,el.firstChild);
+}
+
+function buildBudget(){
+  const labels=['Inventory','Packaging','Moradabad trip','Branding print','Photography props','Shipping supplies','Etsy setup','Buffer','Reserve'];
+  const data=[10000,2500,2500,1500,1000,1000,250,6250,5000];
+  const colors=['#4a8a16','#28a87c','#3478cc','#c44075','#e08c20','#6f68d0','#888780','#c04e26','#9c8a6a'];
+  new Chart(document.getElementById('budgetChart'),{
+    type:'bar',
+    data:{
+      labels:labels,
+      datasets:[{data:data,backgroundColor:colors,borderRadius:6,borderSkipped:false}]
+    },
+    options:{
+      indexAxis:'y',
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'₹'+ctx.parsed.x.toLocaleString('en-IN')},bodyFont:{family:'Inter'},titleFont:{family:'Inter'}}},
+      scales:{
+        x:{grid:{color:'rgba(0,0,0,.06)'},ticks:{callback:v=>'₹'+v.toLocaleString('en-IN'),font:{size:10,family:'Inter'},color:'#9c9489'},border:{dash:[4,4]}},
+        y:{grid:{display:false},ticks:{font:{size:11,family:'Inter'},color:'#5c5650'}}
+      }
+    }
+  });
+}
+</script>
